@@ -83,7 +83,7 @@ $name1 = $name.replace('&acirc;','â').replace('&agrave;','à').replace('&ccedil
 $pathtask = Get-ScheduledTask -TaskPath "*" -TaskName "$name1"
 $pathtask1 = $pathtask.Taskpath
 $taskResult = Get-ScheduledTaskInfo -TaskPath "$pathtask1" -TaskName "$name1"
-$taskResult1 = $taskResult.LastRunTime
+$taskResult1 = $taskResult.NextRunTime
 $date = get-date -date "01/01/1970"
 $taskResult2 = (New-TimeSpan -Start $date -end $taskresult1).TotalSeconds
 Write-Output ($taskResult2)
