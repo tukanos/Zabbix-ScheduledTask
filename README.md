@@ -1,33 +1,32 @@
-================DiscoverScheduledTasks ================
+# Zabbix-ScheduledTask
 
+### Passo 1:
 
-This template use PowerShell Cmdlets to discover and manage Windows Tasks Scheduled. 
+    Copie o arquivo DiscoverScheduledTasks.ps1 para a pasta do Zabbix Agent
+    Normalmente a pasta padrão é "C:\Zabbix\"
 
-Default French translation.
+### Passo 2: 
 
-Items : Task Last Result (Status for each tasks), Task Last Run Time, Task Next Run time
+    Altere se necessário a variável $path no arquivo DiscoverScheduledTasks.ps1, está setado o padrão "\"
 
-Discovery : All tasks Active or Running
+### Passo 3:
 
-Triggers : [HIGH] => Last Result of tasks FAILED
+    No arquivo de configuração do Zabbix Agent adicione os seguintes parâmetros:
 
+    EnableRemoteCommands=1
 
+    UnsafeUserParameters=1
+    
+    Timeout=30
 
-Install : 
+    UserParameter=TaskSchedulerMonitoring[*],powershell -NoProfile -ExecutionPolicy Bypass -File "C:\Zabbix\DiscoverScheduledTasks.ps1" "$1" "$2"
 
-- Install the Zabbix agent on your host,
+### Passo 4:
 
-- Copy DiscoverScheduledTasks.ps1 in your zabbix agent directory,
+    Reinicie o serviço do Zabbix Agent
 
-- In powershell script change $path variable for subsfolders,
-
-- Add the following line to your Zabbix agent configuration file : 
-
-EnableRemoteCommands=1
-
-UnsafeUserParameters=1  
-
-UserParameter=TaskSchedulerMonitoring[*],powershell -NoProfile -ExecutionPolicy Bypass -File "C:\Program Files\Zabbix Agent\DiscoverScheduledTasks.ps1" "$1" "$2"
-
-Value mapping 'scheduledtask' is in french for error ID of tasks.
-
+### Passo 5: 
+     
+     Vincule o template Template Windows Task Scheduled ao host.
+     
+# Telegram: @iakim
