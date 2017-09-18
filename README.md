@@ -31,10 +31,11 @@
      
 ### Passo 6:
         
-        Este passo se faz necessário pois não consegui uma forma de corrigir a conversão das horas de acordo com o timezone do host,
-        por exemplo, meu timezone é de valor -3, logo, quando a informação vai para o Zabbix, ele coloca como -6, provavelmente tem 
-        uma dupla conversão do timezone, uma feita pelo host e outra pelo Zabbix, então a maneira que consegui de se corrigir
-        temporariamente* esse problema é alterando o timezone para universal, de valor 0 e alterando a hora manualmente.
+        Este passo se faz necessário pois não consegui uma forma de corrigir a conversão das horas de acordo com o
+        timezone do host,por exemplo, meu timezone é de valor -3, logo, quando a informação vai para o Zabbix, ele 
+        coloca como -6, provavelmente tem uma dupla conversão do timezone, uma feita pelo host e outra pelo Zabbix, 
+        então a maneira que consegui de se corrigirtemporariamente* esse problema é alterando o timezone para univ-
+        ersal, de valor 0 e alterando a hora manualmente.
         * Estou pesquisando para corrigir o problema
      
 # Telegram: @iakim
