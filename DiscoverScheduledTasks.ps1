@@ -12,7 +12,7 @@
 
 
 
-$path = "\examplefolder\","\examplefolder\examplesubfolder\"
+$path = "\"
 
 
 
