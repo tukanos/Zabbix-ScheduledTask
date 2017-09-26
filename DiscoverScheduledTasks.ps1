@@ -1,6 +1,6 @@
-﻿# Script: DiscoverSchelduledTasks
+# Script: DiscoverSchelduledTasks
 # Author: Romain Si
-# 
+# Revisão: Isaac de Moraes
 # This script is intended for use with Zabbix > 3.x
 #
 #
