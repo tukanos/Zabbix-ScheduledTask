@@ -92,7 +92,7 @@
                                 </application>
                             </applications>
                             <valuemap>
-                                <name>scheduledtask</name>
+                                <name>Task Scheduled</name>
                             </valuemap>
                             <logtimefmt/>
                             <preprocessing/>
@@ -136,7 +136,7 @@
                                 </application>
                             </applications>
                             <valuemap>
-                                <name>scheduledtask</name>
+                                <name>Task Scheduled</name>
                             </valuemap>
                             <logtimefmt/>
                             <preprocessing/>
@@ -218,7 +218,7 @@
     </templates>
     <value_maps>
         <value_map>
-            <name>scheduledtask</name>
+            <name>Task Scheduled</name>
             <mappings>
                 <mapping>
                     <value>0</value>
