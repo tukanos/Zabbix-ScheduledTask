@@ -84,8 +84,7 @@
                             <publickey/>
                             <privatekey/>
                             <port/>
-                            <description>Last Result of Task, numeric value&#13;
-in most cases 0 = succesfull</description>
+                            <description>Last Result of Task, numeric value&#13; in most cases 0 = succesfull</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
