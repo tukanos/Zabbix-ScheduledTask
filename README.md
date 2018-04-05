@@ -5,7 +5,7 @@ Copie o arquivo DiscoverScheduledTasks.ps1 para a pasta do Zabbix Agent
 Normalmente a pasta padrão é "C:\Zabbix\"
 
 ### Passo 2: 
-Altere se necessário a variável $path no arquivo DiscoverScheduledTasks.ps1, está setado o padrão "\"
+Altere se necessário a variável $path no arquivo DiscoverScheduledTasks.ps1, está setado o padrão "\\"
 
 ### Passo 3:
 No arquivo de configuração do Zabbix Agent adicione os seguintes parâmetros:
