@@ -20,8 +20,6 @@ No arquivo de configuração do Zabbix Agent adicione os seguintes parâmetros:
 
 ### Passo 4:
 Reinicie o serviço do Zabbix Agent
-     
-     service zabbix-agent restart
 
 ### Passo 5: 
 Vincule o template Template Windows Task Scheduled ao host.
