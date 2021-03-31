@@ -72,7 +72,7 @@ $pathtask1 = $pathtask.Taskpath
 $taskResult = Get-ScheduledTaskInfo -TaskPath "$pathtask1" -TaskName "$name1"
 $taskResult1 = $taskResult.LastRunTime
 $date = get-date -date "01/01/1970"
-$taskResult2 = (New-TimeSpan -Start $date -end $taskresult1).TotalSeconds
+$taskResult2 = Convert-ToUnixDate($taskResult1)
 Write-Output ($taskResult2)
 }}
 
@@ -85,7 +85,7 @@ $pathtask1 = $pathtask.Taskpath
 $taskResult = Get-ScheduledTaskInfo -TaskPath "$pathtask1" -TaskName "$name1"
 $taskResult1 = $taskResult.NextRunTime
 $date = get-date -date "01/01/1970"
-$taskResult2 = (New-TimeSpan -Start $date -end $taskresult1).TotalSeconds
+$taskResult2 = Convert-ToUnixDate($taskResult1)
 Write-Output ($taskResult2)
 }}
 
