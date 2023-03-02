@@ -19,6 +19,9 @@ $path = "\"
 
 Function Convert-ToUnixDate ($PSdate) {
    $epoch = [timezone]::CurrentTimeZone.ToLocalTime([datetime]'1/1/1970')
+   if ($PSdate -eq $Null) {
+       $PSdate = $epoch
+   }
    (New-TimeSpan -Start $epoch -End $PSdate).TotalSeconds
 }
 
