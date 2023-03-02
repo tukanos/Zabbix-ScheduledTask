@@ -189,7 +189,7 @@
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()}&lt;&gt;0 and {Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()}&lt;&gt;267009 and {Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()}&lt;&gt;1</expression>
+                            <expression>{Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()}&lt;&gt;0 and {Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()}&lt;&gt;267009 and {Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()}&lt;&gt;1 and {Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()}&lt;&gt; 267012 and {Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()}&lt;&gt; 267011</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>Last run of {#APPTASKS} with error!</name>
@@ -197,7 +197,7 @@
                             <correlation_tag/>
                             <url/>
                             <status>0</status>
-                            <priority>4</priority>
+                            <priority>3</priority>
                             <description/>
                             <type>0</type>
                             <manual_close>0</manual_close>
@@ -222,7 +222,7 @@
             <mappings>
                 <mapping>
                     <value>0</value>
-                    <newvalue>Succes</newvalue>
+                    <newvalue>Success</newvalue>
                 </mapping>
                 <mapping>
                     <value>0x41300</value>
@@ -233,7 +233,7 @@
                     <newvalue>The task is running</newvalue>
                 </mapping>
                 <mapping>
-                    <value>0x41303</value>
+                    <value>267011</value>
                     <newvalue>The task has not yet finished</newvalue>
                 </mapping>
                 <mapping>
