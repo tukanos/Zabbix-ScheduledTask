@@ -189,7 +189,7 @@
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()}&lt;&gt;0 and {Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()}&lt;&gt;267009 and {Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()}&lt;&gt;1 and {Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()}&lt;&gt; 267012 and {Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()}&lt;&gt; 267011</expression>
+                            <expression>{Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()}&lt;&gt;0 and {Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()}&lt;&gt;267009 and {Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()}&lt;&gt;2147946720 and {Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()}&lt;&gt; 267012 and {Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()}&lt;&gt; 267011</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>Last run of {#APPTASKS} with error!</name>
@@ -229,43 +229,47 @@
                     <newvalue>The task is ready to run at the next scheduled time</newvalue>
                 </mapping>
                 <mapping>
-                    <value>0x41301</value>
+                    <value>267009</value>
                     <newvalue>The task is running</newvalue>
+                </mapping>
+				<mapping>
+                    <value>2147946720</value>
+                    <newvalue>The task details temporary not available</newvalue>
                 </mapping>
                 <mapping>
                     <value>267011</value>
                     <newvalue>The task has not yet finished</newvalue>
                 </mapping>
                 <mapping>
-                    <value>0x41304</value>
+                    <value>267012</value>
                     <newvalue>There are no scheduled operations for this task</newvalue>
                 </mapping>
                 <mapping>
-                    <value>0x41306</value>
+                    <value>267014</value>
                     <newvalue>The task is completed</newvalue>
                 </mapping>
                 <mapping>
-                    <value>0x800704DD</value>
+                    <value>2147943645</value>
                     <newvalue>The service is not available</newvalue>
                 </mapping>
                 <mapping>
-                    <value>0x8004130F</value>
+                    <value>2147750671</value>
                     <newvalue>Corrupt Identifiers</newvalue>
                 </mapping>
                 <mapping>
-                    <value>0x8004131F</value>
+                    <value>2147750687</value>
                     <newvalue>An instance of this task is already running</newvalue>
                 </mapping>
                 <mapping>
-                    <value>0x8007010B</value>
+                    <value>2147942667</value>
                     <newvalue>The &quot;Start in&quot; directory can not be found</newvalue>
                 </mapping>
                 <mapping>
-                    <value>0x80070002</value>
+                    <value>2147942402</value>
                     <newvalue>One of the files is not available</newvalue>
                 </mapping>
                 <mapping>
-                    <value>0xC06D007E</value>
+                    <value>3228369022</value>
                     <newvalue>Unknown software exception</newvalue>
                 </mapping>
                 <mapping>
