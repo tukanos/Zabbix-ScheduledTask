@@ -9,6 +9,9 @@
 #
 ## Modifier la variable $path pour indiquer les sous dossiers de Tâches Planifiées à traiter sous la forme "\nomDossier\","\nomdossier2\sousdossier\" voir (Get-ScheduledTask -TaskPath )
 ## Change the $path variable to indicate the Scheduled Tasks subfolder to be processed as "\nameFolder\","\nameFolder2\subfolder\" see (Get-ScheduledTask -TaskPath )
+
+$ErrorActionPreference = "Stop"
+
 $paths = "\", "\AG\"
 
 Function Convert-ToUnixDate($PSdate) {
@@ -40,7 +43,7 @@ switch ($ITEM) {
 	"DiscoverTasks" {
 		$data = @()
 		foreach ($path in $paths) {
-			$apptasks = Get-ScheduledTask -TaskPath $path -ErrorAction Ignore | where {$_.state -like "Ready" -and "Running"}
+			$apptasks = Get-ScheduledTask -TaskPath $path | where { $_.state -ne "Disabled" }
 			if ($NULL -eq $apptasks) { continue }
 
 			foreach ($currentapptasks in $apptasks)	{
