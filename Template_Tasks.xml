@@ -189,7 +189,22 @@
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()}&lt;&gt;0 and {Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()}&lt;&gt;267009 and {Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()}&lt;&gt;2147946720 and {Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()}&lt;&gt; 267012 and {Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()}&lt;&gt; 267011</expression>
+							<!--
+								https://www.get-itsolutions.com/task-scheduler-0x41303-0x41306/
+								0x41301 	267009 		Task is already running
+								0x41302		267010		Task Is Disabled
+								0x41303		267011		Task has not yet run
+								0x41304		267012		There are no more runs scheduled for this task
+								0x800710E0 	2147946720 	The operator or administrator has refused the request
+							-->
+                            <expression>
+									{Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()} &lt;&gt; 0
+								and {Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()} &lt;&gt; 267009
+								and {Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()} &lt;&gt; 267010
+								and {Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()} &lt;&gt; 267011
+								and {Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()} &lt;&gt; 267012
+								and {Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()} &lt;&gt; 2147946720
+							</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>Last run of {#APPTASKS} with error!</name>
