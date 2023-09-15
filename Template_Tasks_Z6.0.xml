@@ -65,6 +65,8 @@
 								and last(/Template Windows Task Scheduled/TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}]) &lt;&gt; 267012
 								and last(/Template Windows Task Scheduled/TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}]) &lt;&gt; 2147946720
 							</expression>
+				    <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+				    <recovery_expression>last(/Template Windows Task Scheduled/TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}]) = 0</recovery_expression>
                                     <name>Last run of {#APPTASKS} with error!</name>
                                     <priority>WARNING</priority>
                                 </trigger_prototype>
