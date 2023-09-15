@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
-    <version>6.0</version>
-    <date>2023-05-19T12:23:39Z</date>
-    <groups>
-        <group>
+    <version>6.2</version>
+    <date>2023-09-15T08:17:12Z</date>
+    <template_groups>
+        <template_group>
             <uuid>7df96b18c230490a9a0a9e2307226338</uuid>
             <name>Templates</name>
-        </group>
-    </groups>
+        </template_group>
+    </template_groups>
     <templates>
         <template>
             <uuid>57954842d3fb43c5923be6da6458432f</uuid>
@@ -24,17 +24,7 @@
                     <uuid>2c727e6fbe3f4f26903bd376636f19aa</uuid>
                     <name>Discovery Task Scheduler</name>
                     <key>TaskSchedulerMonitoring[discovertasks]</key>
-                    <delay>2h</delay>
-                    <filter>
-                        <conditions>
-                            <condition>
-                                <macro>{#APPTASKS}</macro>
-                                <value>{$NAME.NOT_MATCHES}</value>
-                                <operator>NOT_MATCHES_REGEX</operator>
-                                <formulaid>A</formulaid>
-                            </condition>
-                        </conditions>
-                    </filter>
+                    <delay>60</delay>
                     <lifetime>0</lifetime>
                     <description>Discover all Task at &quot;Task Scheduler Libraray&quot; with Subfolders indicate in powershell script.</description>
                     <item_prototypes>
@@ -42,9 +32,8 @@
                             <uuid>68b168b5266c4f66864a99065c2549c3</uuid>
                             <name>Task: {#APPTASKS}: Last Result</name>
                             <key>TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}]</key>
-                            <delay>1h</delay>
-                            <description>Last Result of Task, numeric value
- in most cases 0 = succesfull</description>
+                            <delay>120</delay>
+                            <description>Last Result of Task, numeric value&#13; in most cases 0 = succesfull</description>
                             <valuemap>
                                 <name>Task Scheduled</name>
                             </valuemap>
@@ -64,7 +53,9 @@
 								and last(/Template Windows Task Scheduled/TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}]) &lt;&gt; 267011
 								and last(/Template Windows Task Scheduled/TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}]) &lt;&gt; 267012
 								and last(/Template Windows Task Scheduled/TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}]) &lt;&gt; 2147946720
-							</expression>
+									</expression>
+                                    <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                                    <recovery_expression>last(/Template Windows Task Scheduled/TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}]) = 0</recovery_expression>                                    
                                     <name>Last run of {#APPTASKS} with error!</name>
                                     <priority>WARNING</priority>
                                 </trigger_prototype>
@@ -74,7 +65,7 @@
                             <uuid>ee287193334d4630a3fb0eceaa924711</uuid>
                             <name>Task: {#APPTASKS}: Last Run Time</name>
                             <key>TaskSchedulerMonitoring[TaskLastRunTime,{#APPTASKS}]</key>
-                            <delay>1h</delay>
+                            <delay>120</delay>
                             <units>unixtime</units>
                             <description>Last Run Time of Task as an unixtimestamp</description>
                             <valuemap>
@@ -91,7 +82,7 @@
                             <uuid>4cb82427c9684d27aada5a12b6ea3cae</uuid>
                             <name>Task: {#APPTASKS}: Next Run Time</name>
                             <key>TaskSchedulerMonitoring[TaskNextRunTime,{#APPTASKS}]</key>
-                            <delay>1h</delay>
+                            <delay>120</delay>
                             <units>unixtime</units>
                             <description>Next Run Time of Task as an unixtimestamp</description>
                             <tags>
@@ -104,12 +95,6 @@
                     </item_prototypes>
                 </discovery_rule>
             </discovery_rules>
-            <macros>
-                <macro>
-                    <macro>{$NAME.NOT_MATCHES}</macro>
-                    <value>Optimize Start|ShadowCopyVolume|CreateExplorerShellUnelevatedTask</value>
-                </macro>
-            </macros>
             <valuemaps>
                 <valuemap>
                     <uuid>839b33549ce54b11927857ff95597d20</uuid>
