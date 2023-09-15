@@ -23,15 +23,15 @@ Function Convert-ToUnixDate($PSdate) {
 }
 
 function Get-ScheduledTaskByFullName($fullname) {
-	$path = $fullname.Substring(0, $fullname.LastIndexOf('\') + 1)
-	$name = $fullname.Substring($fullname.LastIndexOf('\') + 1)
+	$path = $fullname.Substring(0, $fullname.LastIndexOf('/') + 1).replace("/","\")
+	$name = $fullname.Substring($fullname.LastIndexOf('/') + 1)
 
 	return Get-ScheduledTask -TaskPath "$path" -TaskName "$name"
 }
 
 function Get-ScheduledTaskInfoByFullName($fullname) {
-	$path = $fullname.Substring(0, $fullname.LastIndexOf('\') + 1)
-	$name = $fullname.Substring($fullname.LastIndexOf('\') + 1)
+	$path = $fullname.Substring(0, $fullname.LastIndexOf('/') + 1).replace("/","\")
+	$name = $fullname.Substring($fullname.LastIndexOf('/') + 1)
 
 	return Get-ScheduledTaskInfo -TaskPath "$path" -TaskName "$name"
 }
@@ -49,7 +49,7 @@ switch ($ITEM) {
 			foreach ($currentapptasks in $apptasks)	{
 				# $apptasksok = $apptasksok1.replace('â','&acirc;').replace('à','&agrave;').replace('ç','&ccedil;').replace('é','&eacute;').replace('è','&egrave;').replace('ê','&ecirc;')
 			
-				$data += @{ "{#APPTASKS}" = $currentapptasks.TaskPath + $currentapptasks.TaskName }				
+				$data += @{ "{#APPTASKS}" = $currentapptasks.TaskPath.replace("\","/") + $currentapptasks.TaskName }		
 			}
 		}
 
