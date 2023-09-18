@@ -9,10 +9,6 @@
 
 ## Step 3:
 #### In the configuration file of Zabbix Agent add the following parameters:
-
-    EnableRemoteCommands=1
-
-    UnsafeUserParameters=1
     
     Timeout=30
 
