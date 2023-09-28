@@ -23,7 +23,7 @@
                 <discovery_rule>
                     <uuid>2c727e6fbe3f4f26903bd376636f19aa</uuid>
                     <name>Discovery Task Scheduler</name>
-                    <key>TaskSchedulerMonitoring[discovertasks]</key>
+                    <key>TaskSchedulerMonitoring[{$TASKPATHS},discovertasks]</key>
                     <delay>2h</delay>
                     <filter>
                         <conditions>
