@@ -34,9 +34,9 @@ function Get-ScheduledTaskInfoByFullName($fullname) {
 	return Get-ScheduledTaskInfo -TaskPath "$path" -TaskName "$name"
 }
 
-$Item = [string]$args[0]
-$Id = [string]$args[1]
-$Paths = [string]$args[2]
+$Paths = $args[0]
+$Item = [string]$args[1]
+$Id = [string]$args[2]
 
 switch ($Item) {
 	"DiscoverTasks" {
@@ -46,9 +46,7 @@ switch ($Item) {
 			if ($NULL -eq $apptasks) { continue }
 
 			foreach ($currentapptasks in $apptasks)	{
-				# $apptasksok = $apptasksok1.replace('â','&acirc;').replace('à','&agrave;').replace('ç','&ccedil;').replace('é','&eacute;').replace('è','&egrave;').replace('ê','&ecirc;')
-			
-				$data += @{ "{#APPTASKS}" = $currentapptasks.TaskPath.replace("\","/") + $currentapptasks.TaskName }		
+				$data += @{ "{#APPTASKS}" = $currentapptasks.TaskPath.replace("\","/") + $currentapptasks.TaskName }
 			}
 		}
 
