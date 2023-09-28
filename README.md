@@ -5,7 +5,7 @@
 #### Normally is in "C:\Zabbix\"
 
 ## Step 2:
-#### Add host level macro {$TASKPATHS} (open host properties and look for the "Macros" tab) and specify folder in Task Scheduler Library to monitor your tasks, root is "/"
+#### Add host level macro {$TASKPATHS} (open host properties and look for the "Macros" tab) and specify your tasks location(s) in Task Scheduler Library, root is "/", custom folder may be "/CustomFolder/", several locations will be comma-separated: "/","/CustomFolder/"
 
 ## Step 3:
 #### In the configuration file of Zabbix Agent add the following parameters:
