@@ -40,7 +40,9 @@ $Id = [string]$args[2]
 
 switch ($Item) {
 	"DiscoverTasks" {
-		$data = @()
+ 		$data = @()
+   		$Paths = $Paths.replace('/','\')
+		$Paths = $Paths.Split(',')
 		foreach ($path in $Paths) {
 			$apptasks = Get-ScheduledTask -TaskPath $path | where { $_.state -ne "Disabled" }
 			if ($NULL -eq $apptasks) { continue }
