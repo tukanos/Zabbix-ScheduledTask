@@ -5,14 +5,14 @@
 #### Normally is in "C:\Zabbix\"
 
 ## Step 2:
-#### Change if necessary the $path variable in file DiscoverScheduledTasks.ps1, default is "\"
+#### Add host level macro {$TASKPATHS} (open host properties and look for the "Macros" tab) and specify folder in Task Scheduler Library to monitor your tasks, root is "/"
 
 ## Step 3:
 #### In the configuration file of Zabbix Agent add the following parameters:
     
     Timeout=30
 
-    UserParameter=TaskSchedulerMonitoring[*],powershell -NoProfile -ExecutionPolicy Bypass -File "C:\Zabbix\DiscoverScheduledTasks.ps1" "$1" "$2"
+    UserParameter=TaskSchedulerMonitoring[*],powershell -NoProfile -ExecutionPolicy Bypass -File "C:\Zabbix\DiscoverScheduledTasks.ps1" "$1" "$2" "$3"
 
 ## Step 4:
 #### Verify if your Windows Hosts is enable for execute scripts, if no, run in powershell:
