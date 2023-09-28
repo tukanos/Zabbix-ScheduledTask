@@ -34,7 +34,7 @@ function Get-ScheduledTaskInfoByFullName($fullname) {
 	return Get-ScheduledTaskInfo -TaskPath "$path" -TaskName "$name"
 }
 
-$Paths = $args[0]
+$Paths = [string]$args[0]
 $Item = [string]$args[1]
 $Id = [string]$args[2]
 
