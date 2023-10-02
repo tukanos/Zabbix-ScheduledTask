@@ -12,8 +12,6 @@
 
 $ErrorActionPreference = "Stop"
 
-$paths = "\", "\AG\"
-
 Function Convert-ToUnixDate($PSdate) {
 	$epoch = [timezone]::CurrentTimeZone.ToLocalTime([datetime]'1/1/1970')
 	if ($PSdate -eq $Null) {
@@ -36,20 +34,21 @@ function Get-ScheduledTaskInfoByFullName($fullname) {
 	return Get-ScheduledTaskInfo -TaskPath "$path" -TaskName "$name"
 }
 
-$ITEM = [string]$args[0]
-$ID = [string]$args[1]
+$Paths = [string]$args[0]
+$Item = [string]$args[1]
+$Id = [string]$args[2]
 
-switch ($ITEM) {
+switch ($Item) {
 	"DiscoverTasks" {
-		$data = @()
-		foreach ($path in $paths) {
+ 		$data = @()
+   		$Paths = $Paths.replace('/','\')
+		$Paths = $Paths.Split(',')
+		foreach ($path in $Paths) {
 			$apptasks = Get-ScheduledTask -TaskPath $path | where { $_.state -ne "Disabled" }
 			if ($NULL -eq $apptasks) { continue }
 
 			foreach ($currentapptasks in $apptasks)	{
-				# $apptasksok = $apptasksok1.replace('â','&acirc;').replace('à','&agrave;').replace('ç','&ccedil;').replace('é','&eacute;').replace('è','&egrave;').replace('ê','&ecirc;')
-			
-				$data += @{ "{#APPTASKS}" = $currentapptasks.TaskPath.replace("\","/") + $currentapptasks.TaskName }		
+				$data += @{ "{#APPTASKS}" = $currentapptasks.TaskPath.replace("\","/") + $currentapptasks.TaskName }
 			}
 		}
 
@@ -58,12 +57,12 @@ switch ($ITEM) {
 	}
 
 	"TaskLastResult" {
-		$taskResult = Get-ScheduledTaskInfoByFullName $ID
+		$taskResult = Get-ScheduledTaskInfoByFullName $Id
 		Write-Output ($taskResult.LastTaskResult)
 	}
 
 	"TaskLastRunTime" {
-		$taskResult = Get-ScheduledTaskInfoByFullName $ID
+		$taskResult = Get-ScheduledTaskInfoByFullName $Id
 
 		$taskResult1 = $taskResult.LastRunTime
 		$date = get-date -date "01/01/1970"
@@ -72,7 +71,7 @@ switch ($ITEM) {
 	}
 
 	"TaskNextRunTime" {
-		$taskResult = Get-ScheduledTaskInfoByFullName $ID
+		$taskResult = Get-ScheduledTaskInfoByFullName $Id
 
 		$taskResult1 = $taskResult.NextRunTime
 		$date = get-date -date "01/01/1970"
@@ -81,7 +80,7 @@ switch ($ITEM) {
 	}
 
 	"TaskState" {
-		$pathtask = Get-ScheduledTaskByFullName $ID
+		$pathtask = Get-ScheduledTaskByFullName $Id
 		$pathtask1 = $pathtask.State
 		Write-Output ($pathtask1)
 	}

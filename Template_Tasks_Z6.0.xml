@@ -23,13 +23,13 @@
                 <discovery_rule>
                     <uuid>2c727e6fbe3f4f26903bd376636f19aa</uuid>
                     <name>Discovery Task Scheduler</name>
-                    <key>TaskSchedulerMonitoring[discovertasks]</key>
+                    <key>TaskSchedulerMonitoring[{$TASKPATHS},discovertasks]</key>
                     <delay>2h</delay>
                     <filter>
                         <conditions>
                             <condition>
                                 <macro>{#APPTASKS}</macro>
-                                <value>{$NAME.NOT_MATCHES}</value>
+                                <value>{$TASKNAME.NOT_MATCHES}</value>
                                 <operator>NOT_MATCHES_REGEX</operator>
                                 <formulaid>A</formulaid>
                             </condition>
@@ -108,8 +108,12 @@
             </discovery_rules>
             <macros>
                 <macro>
-                    <macro>{$NAME.NOT_MATCHES}</macro>
+                    <macro>{$TASKNAME.NOT_MATCHES}</macro>
                     <value>Optimize Start|ShadowCopyVolume|CreateExplorerShellUnelevatedTask</value>
+                </macro>
+		<macro>
+                    <macro>{$TASKPATHS}</macro>
+                    <value>/</value>
                 </macro>
             </macros>
             <valuemaps>
