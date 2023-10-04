@@ -41,7 +41,7 @@
                         <item_prototype>
                             <uuid>68b168b5266c4f66864a99065c2549c3</uuid>
                             <name>Task: {#APPTASKS}: Last Result</name>
-                            <key>TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}]</key>
+                            <key>TaskSchedulerMonitoring[{$TASKPATHS},TaskLastResult,{#APPTASKS}]</key>
                             <delay>1h</delay>
                             <description>Last Result of Task, numeric value
  in most cases 0 = succesfull</description>
@@ -75,7 +75,7 @@
                         <item_prototype>
                             <uuid>ee287193334d4630a3fb0eceaa924711</uuid>
                             <name>Task: {#APPTASKS}: Last Run Time</name>
-                            <key>TaskSchedulerMonitoring[TaskLastRunTime,{#APPTASKS}]</key>
+                            <key>TaskSchedulerMonitoring[{$TASKPATHS},TaskLastRunTime,{#APPTASKS}]</key>
                             <delay>1h</delay>
                             <units>unixtime</units>
                             <description>Last Run Time of Task as an unixtimestamp</description>
@@ -92,7 +92,7 @@
                         <item_prototype>
                             <uuid>4cb82427c9684d27aada5a12b6ea3cae</uuid>
                             <name>Task: {#APPTASKS}: Next Run Time</name>
-                            <key>TaskSchedulerMonitoring[TaskNextRunTime,{#APPTASKS}]</key>
+                            <key>TaskSchedulerMonitoring[{$TASKPATHS},TaskNextRunTime,{#APPTASKS}]</key>
                             <delay>1h</delay>
                             <units>unixtime</units>
                             <description>Next Run Time of Task as an unixtimestamp</description>
