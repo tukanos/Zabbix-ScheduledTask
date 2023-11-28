@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>6.0</version>
-    <date>2023-11-28T10:23:12Z</date>
+    <date>2023-11-28T10:58:13Z</date>
     <groups>
         <group>
             <uuid>7df96b18c230490a9a0a9e2307226338</uuid>
@@ -107,7 +107,7 @@ and last(/Template Windows Task Scheduled/TaskSchedulerMonitoring[{$TASKPATHS},T
             <macros>
                 <macro>
                     <macro>{$TASKNAME.NOT_MATCHES}</macro>
-                    <value>Optimize Start|ShadowCopyVolume|CreateExplorerShellUnelevatedTask</value>
+                    <value>Optimize Start|ShadowCopyVolume|CreateExplorerShellUnelevatedTask|OneDrive Standalone Update Task.*|OneDrive Reporting Task.*</value>
                 </macro>
                 <macro>
                     <macro>{$TASKPATHS}</macro>
