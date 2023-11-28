@@ -23,13 +23,13 @@
                 <discovery_rule>
                     <uuid>2c727e6fbe3f4f26903bd376636f19aa</uuid>
                     <name>Discovery Task Scheduler</name>
-                    <key>TaskSchedulerMonitoring[discovertasks]</key>
+                    <key>TaskSchedulerMonitoring[{$TASKPATHS},discovertasks]</key>
                     <delay>2h</delay>
                     <filter>
                         <conditions>
                             <condition>
                                 <macro>{#APPTASKS}</macro>
-                                <value>{$NAME.NOT_MATCHES}</value>
+                                <value>{$TASKNAME.NOT_MATCHES}</value>
                                 <operator>NOT_MATCHES_REGEX</operator>
                                 <formulaid>A</formulaid>
                             </condition>
@@ -41,7 +41,7 @@
                         <item_prototype>
                             <uuid>68b168b5266c4f66864a99065c2549c3</uuid>
                             <name>Task: {#APPTASKS}: Last Result</name>
-                            <key>TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}]</key>
+                            <key>TaskSchedulerMonitoring[{$TASKPATHS},TaskLastResult,{#APPTASKS}]</key>
                             <delay>1h</delay>
                             <description>Last Result of Task, numeric value
  in most cases 0 = succesfull</description>
@@ -65,6 +65,8 @@
 								and last(/Template Windows Task Scheduled/TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}]) &lt;&gt; 267012
 								and last(/Template Windows Task Scheduled/TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}]) &lt;&gt; 2147946720
 							</expression>
+				    <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+				    <recovery_expression>last(/Template Windows Task Scheduled/TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}]) = 0</recovery_expression>
                                     <name>Last run of {#APPTASKS} with error!</name>
                                     <priority>WARNING</priority>
                                 </trigger_prototype>
@@ -73,7 +75,7 @@
                         <item_prototype>
                             <uuid>ee287193334d4630a3fb0eceaa924711</uuid>
                             <name>Task: {#APPTASKS}: Last Run Time</name>
-                            <key>TaskSchedulerMonitoring[TaskLastRunTime,{#APPTASKS}]</key>
+                            <key>TaskSchedulerMonitoring[{$TASKPATHS},TaskLastRunTime,{#APPTASKS}]</key>
                             <delay>1h</delay>
                             <units>unixtime</units>
                             <description>Last Run Time of Task as an unixtimestamp</description>
@@ -90,7 +92,7 @@
                         <item_prototype>
                             <uuid>4cb82427c9684d27aada5a12b6ea3cae</uuid>
                             <name>Task: {#APPTASKS}: Next Run Time</name>
-                            <key>TaskSchedulerMonitoring[TaskNextRunTime,{#APPTASKS}]</key>
+                            <key>TaskSchedulerMonitoring[{$TASKPATHS},TaskNextRunTime,{#APPTASKS}]</key>
                             <delay>1h</delay>
                             <units>unixtime</units>
                             <description>Next Run Time of Task as an unixtimestamp</description>
@@ -106,8 +108,12 @@
             </discovery_rules>
             <macros>
                 <macro>
-                    <macro>{$NAME.NOT_MATCHES}</macro>
+                    <macro>{$TASKNAME.NOT_MATCHES}</macro>
                     <value>Optimize Start|ShadowCopyVolume|CreateExplorerShellUnelevatedTask</value>
+                </macro>
+		<macro>
+                    <macro>{$TASKPATHS}</macro>
+                    <value>/</value>
                 </macro>
             </macros>
             <valuemaps>
