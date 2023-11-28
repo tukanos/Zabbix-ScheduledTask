@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>6.0</version>
-    <date>2023-05-19T12:23:39Z</date>
+    <date>2023-11-28T10:23:12Z</date>
     <groups>
         <group>
             <uuid>7df96b18c230490a9a0a9e2307226338</uuid>
@@ -57,16 +57,14 @@
                             <trigger_prototypes>
                                 <trigger_prototype>
                                     <uuid>052e3e90fdff4ac09d18123ce6a506cc</uuid>
-                                    <expression>
-									last(/Template Windows Task Scheduled/TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}]) &lt;&gt; 0
-								and last(/Template Windows Task Scheduled/TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}]) &lt;&gt; 267009
-								and last(/Template Windows Task Scheduled/TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}]) &lt;&gt; 267010
-								and last(/Template Windows Task Scheduled/TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}]) &lt;&gt; 267011
-								and last(/Template Windows Task Scheduled/TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}]) &lt;&gt; 267012
-								and last(/Template Windows Task Scheduled/TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}]) &lt;&gt; 2147946720
-							</expression>
-				    <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
-				    <recovery_expression>last(/Template Windows Task Scheduled/TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}]) = 0</recovery_expression>
+                                    <expression>last(/Template Windows Task Scheduled/TaskSchedulerMonitoring[{$TASKPATHS},TaskLastResult,{#APPTASKS}]) &lt;&gt; 0
+and last(/Template Windows Task Scheduled/TaskSchedulerMonitoring[{$TASKPATHS},TaskLastResult,{#APPTASKS}]) &lt;&gt; 267009
+and last(/Template Windows Task Scheduled/TaskSchedulerMonitoring[{$TASKPATHS},TaskLastResult,{#APPTASKS}]) &lt;&gt; 267010
+and last(/Template Windows Task Scheduled/TaskSchedulerMonitoring[{$TASKPATHS},TaskLastResult,{#APPTASKS}]) &lt;&gt; 267011
+and last(/Template Windows Task Scheduled/TaskSchedulerMonitoring[{$TASKPATHS},TaskLastResult,{#APPTASKS}]) &lt;&gt; 267012
+and last(/Template Windows Task Scheduled/TaskSchedulerMonitoring[{$TASKPATHS},TaskLastResult,{#APPTASKS}]) &lt;&gt; 2147946720</expression>
+                                    <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                                    <recovery_expression>last(/Template Windows Task Scheduled/TaskSchedulerMonitoring[{$TASKPATHS},TaskLastResult,{#APPTASKS}]) = 0</recovery_expression>
                                     <name>Last run of {#APPTASKS} with error!</name>
                                     <priority>WARNING</priority>
                                 </trigger_prototype>
@@ -111,7 +109,7 @@
                     <macro>{$TASKNAME.NOT_MATCHES}</macro>
                     <value>Optimize Start|ShadowCopyVolume|CreateExplorerShellUnelevatedTask</value>
                 </macro>
-		<macro>
+                <macro>
                     <macro>{$TASKPATHS}</macro>
                     <value>/</value>
                 </macro>
