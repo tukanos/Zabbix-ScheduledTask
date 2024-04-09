@@ -13,7 +13,7 @@
             <uuid>57954842d3fb43c5923be6da6458432f</uuid>
             <template>Template Windows Task Scheduled</template>
             <name>Template Windows Task Scheduled</name>
-            <description>Discover and monitor all Task from &quot;Task Scheduler Library&quot; with subfolders indicate in powershell script.</description>
+            <description>Discover and monitor all Task from &quot;Task Scheduler Library&quot; with sub-folders indicate in powershell script.</description>
             <groups>
                 <group>
                     <name>Templates</name>
@@ -36,7 +36,7 @@
                         </conditions>
                     </filter>
                     <lifetime>0</lifetime>
-                    <description>Discover all Task at &quot;Task Scheduler Libraray&quot; with Subfolders indicate in powershell script.</description>
+                    <description>Discover all Task at &quot;Task Scheduler Library&quot; with Sub-folders indicate in powershell script.</description>
                     <item_prototypes>
                         <item_prototype>
                             <uuid>68b168b5266c4f66864a99065c2549c3</uuid>
@@ -44,7 +44,7 @@
                             <key>TaskSchedulerMonitoring[{$TASKPATHS},TaskLastResult,{#APPTASKS}]</key>
                             <delay>1h</delay>
                             <description>Last Result of Task, numeric value
- in most cases 0 = succesfull</description>
+ in most cases 0 = successful</description>
                             <valuemap>
                                 <name>Task Scheduled</name>
                             </valuemap>
