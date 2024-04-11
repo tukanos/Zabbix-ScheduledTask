@@ -17,12 +17,11 @@
 
 $ErrorActionPreference = "Stop"
 
-function Convert-ToUnixDate($PSdate) {
-	$epoch = [timezone]::CurrentTimeZone.ToLocalTime([datetime]'1/1/1970')
-	if ($PSdate -eq $Null) {
-		$PSdate = $epoch
-	}
-	(New-TimeSpan -Start $epoch -End $PSdate).TotalSeconds
+function Convert-ToUnixDate($taskTime) {
+    $epoch = [timezone]::CurrentTimeZone.ToLocalTime([datetime]'1/1/1970')
+    if ($taskTime -eq $Null) { $taskTime = $epoch }
+    
+    return (New-TimeSpan -Start $epoch -End $taskTime).TotalSeconds
 }
 
 function Get-ScheduledTaskByFullName($fullname) {
