@@ -76,4 +76,8 @@ switch ($taskAction) {
         $taskState = (Get-ScheduledTaskByFullName $taskPath $taskName).State
         Write-Output $taskState
     }
+
+    Default {
+        throw "Error trying getting  task action: $taskAction"
+    }
 }
