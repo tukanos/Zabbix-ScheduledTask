@@ -20,69 +20,60 @@ $ErrorActionPreference = "Stop"
 function Convert-ToUnixDate($taskTime) {
     $epoch = [timezone]::CurrentTimeZone.ToLocalTime([datetime]'1/1/1970')
     if ($taskTime -eq $Null) { $taskTime = $epoch }
-    
     return (New-TimeSpan -Start $epoch -End $taskTime).TotalSeconds
 }
 
-function Get-ScheduledTaskByFullName($fullname) {
-	$path = $fullname.Substring(0, $fullname.LastIndexOf('/') + 1).replace("/","\")
-	$name = $fullname.Substring($fullname.LastIndexOf('/') + 1)
-
-	return Get-ScheduledTask -TaskPath "$path" -TaskName "$name"
+# Note: Not using Get-ScheduledTaskInfo directly as it can not deal correctly with accented or wild characters
+function Get-ScheduledTaskInfoByFullName($path, $name) {
+    return (Get-ScheduledTask -TaskPath "$path" -TaskName "$name" | Get-ScheduledTaskInfo)
 }
 
-function Get-ScheduledTaskInfoByFullName($fullname) {
-	$path = $fullname.Substring(0, $fullname.LastIndexOf('/') + 1).replace("/","\")
-	$name = $fullname.Substring($fullname.LastIndexOf('/') + 1)
-
-	return Get-ScheduledTaskInfo -TaskPath "$path" -TaskName "$name"
+function Get-ScheduledTaskByFullName($path, $name) {
+    return Get-ScheduledTask -TaskPath "$path" -TaskName "$name"
 }
 
-$Paths = [string]$args[0]
-$Item = [string]$args[1]
-$Id = [string]$args[2]
+# Zabbix template is using the forward slash (/) instead of the Task schedule XML's backslash (\) - changing to the proper XML's style
+# Note: The backslash and star (*) are considered unsafe character in Zabbix
+$taskPath = ([string]$args[0]).replace('/','\')
+$taskAction = [string]$args[1]
+# getting only portion task name from the task path and name
+$taskName = ([string]$args[2]).Substring(([string]$args[2]).LastIndexOf('/') + 1)
 
-switch ($Item) {
-	"DiscoverTasks" {
- 		$data = @()
-   		$Paths = $Paths.replace('/','\') -split ',' | % { $_.Trim() }
-		foreach ($path in $Paths) {
-			$apptasks = Get-ScheduledTask -TaskPath $path | where { $_.state -ne "Disabled" }
-			if ($NULL -eq $apptasks) { continue }
 
-			foreach ($currentapptasks in $apptasks)	{
-				$data += @{ "{#APPTASKS}" = $currentapptasks.TaskPath.replace("\","/") + $currentapptasks.TaskName }
-			}
-		}
+switch ($taskAction) {
+    'DiscoverTasks' {
+        $data = @()
+        $taskPath = $taskPath -split ',' | % { $_.Trim() }
+        foreach ($path in $taskPath) {
+            $appTasks = Get-ScheduledTask -TaskPath $path | where { $_.state -ne "Disabled" }
+            if ($appTasks -eq $null) { continue }
+            foreach ($currentAppTasks in $appTasks) {
+                $data += @{ '{#APPTASKS}' = $currentAppTasks.TaskPath.replace('\','/') + $currentAppTasks.TaskName }
+            }
+        }
+        $json = @{ 'data' = $data }
+        $json | ConvertTo-Json | Write-Host
+    }
 
-		$json = @{ "data" = $data }
-		$json | ConvertTo-Json | Write-Host
-	}
+    'TaskLastResult' {
+        $lastTaskResult = (Get-ScheduledTaskInfoByFullName $taskPath $taskName).LastTaskResult
+        Write-Output $lastTaskResult
+    }
 
-	"TaskLastResult" {
-		$taskResult = Get-ScheduledTaskInfoByFullName $Id
-		Write-Output ($taskResult.LastTaskResult)
-	}
+    'TaskLastRunTime' {
+        $lastRunTime = (Get-ScheduledTaskInfoByFullName $taskPath $taskName).LastRunTime
+        $unixTime = Convert-ToUnixDate($lastRunTime)
+        Write-Output $unixTime
+    }
 
-	"TaskLastRunTime" {
-		$taskResult = Get-ScheduledTaskInfoByFullName $Id
+    'TaskNextRunTime' {
+        $nextRunTime = (Get-ScheduledTaskInfoByFullName $taskPath $taskName).NextRunTime
+        $unixTime = Convert-ToUnixDate($nextRunTime)
+        Write-Output $unixTime
+    }
 
-		$taskResult1 = $taskResult.LastRunTime
-		$taskResult2 = Convert-ToUnixDate($taskResult1)
-		Write-Output ($taskResult2)
-	}
-
-	"TaskNextRunTime" {
-		$taskResult = Get-ScheduledTaskInfoByFullName $Id
-
-		$taskResult1 = $taskResult.NextRunTime
-		$taskResult2 = Convert-ToUnixDate($taskResult1)
-		Write-Output ($taskResult2)
-	}
-
-	"TaskState" {
-		$pathtask = Get-ScheduledTaskByFullName $Id
-		$pathtask1 = $pathtask.State
-		Write-Output ($pathtask1)
-	}
+    'TaskState' {
+        $taskState = (Get-ScheduledTaskByFullName $taskPath $taskName).State
+        Write-Output $taskState
+    }
 }
