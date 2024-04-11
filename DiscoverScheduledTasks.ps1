@@ -4,6 +4,7 @@
 # Revision: Patrik Svestka
 #
 # This script is intended for use with Zabbix > 3.x
+# Note: This script uses front slash in the path instead of Task Schedule's backslash path (XML) as the backslash are considered unsafe character in Zabbix
 #
 # Add to Zabbix Agent
 # UserParameter=TaskSchedulerMonitoring[*],powershell -NoProfile -ExecutionPolicy Bypass -File "C:\Program Files\Zabbix Agent\DiscoverScheduledTasks.ps1" "$1" "$2" "$3"
@@ -17,9 +18,6 @@
 #   `.\DiscoverSchelduledTasks.ps1 '/Accounting/*,/Backup/' 'DiscoverTasks'`
 # 2) Show the last task result for the AccoungDailyBackup task
 #    `'.\DiscoverSchelduledTasks.ps1 '/Accounting/' 'TaskLastResult' 'AccountingDailyBackup'`
-#
-## Modifier la variable $path pour indiquer les sous dossiers de Tâches Planifiées à traiter sous la forme "\nomDossier\","\nomdossier2\sousdossier\" voir (Get-ScheduledTask -TaskPath )
-## Change the $path variable to indicate the Scheduled Tasks subfolder to be processed as "\nameFolder\","\nameFolder2\subfolder\" see (Get-ScheduledTask -TaskPath )
 
 $ErrorActionPreference = "Stop"
 
@@ -39,7 +37,6 @@ function Get-ScheduledTaskByFullName($path, $name) {
 }
 
 # Zabbix template is using the forward slash (/) instead of the Task schedule XML's backslash (\) - changing to the proper XML's style
-# Note: The backslash are considered unsafe character in Zabbix, same as star (*) above
 $taskPath = ([string]$args[0]).replace('/','\')
 $taskAction = [string]$args[1]
 # getting only portion task name from the task path and name
