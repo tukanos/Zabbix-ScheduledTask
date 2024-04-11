@@ -5,12 +5,18 @@
 #
 # This script is intended for use with Zabbix > 3.x
 #
-#
 # Add to Zabbix Agent
 # UserParameter=TaskSchedulerMonitoring[*],powershell -NoProfile -ExecutionPolicy Bypass -File "C:\Program Files\Zabbix Agent\DiscoverScheduledTasks.ps1" "$1" "$2" "$3"
 #
 # Note: should there be a need to use wild char star (*) in the task path - it is considered to be an unsafe character in Zabbix- it needs to be enabled
 #       in zabbix_agent2.conf using UnsafeUserParameters=1
+#
+# Examples when running directly from PowerShell:
+#
+# 1) List all tasks at the path /Accounting/ including the subfolders and list the /backup/ only
+#   `.\DiscoverSchelduledTasks.ps1 '/Accounting/*,/Backup/' 'DiscoverTasks'`
+# 2) Show the last task result for the AccoungDailyBackup task
+#    `'.\DiscoverSchelduledTasks.ps1 '/Accounting/' 'TaskLastResult' 'AccountingDailyBackup'`
 #
 ## Modifier la variable $path pour indiquer les sous dossiers de Tâches Planifiées à traiter sous la forme "\nomDossier\","\nomdossier2\sousdossier\" voir (Get-ScheduledTask -TaskPath )
 ## Change the $path variable to indicate the Scheduled Tasks subfolder to be processed as "\nameFolder\","\nameFolder2\subfolder\" see (Get-ScheduledTask -TaskPath )
@@ -33,12 +39,11 @@ function Get-ScheduledTaskByFullName($path, $name) {
 }
 
 # Zabbix template is using the forward slash (/) instead of the Task schedule XML's backslash (\) - changing to the proper XML's style
-# Note: The backslash and star (*) are considered unsafe character in Zabbix
+# Note: The backslash are considered unsafe character in Zabbix, same as star (*) above
 $taskPath = ([string]$args[0]).replace('/','\')
 $taskAction = [string]$args[1]
 # getting only portion task name from the task path and name
 $taskName = ([string]$args[2]).Substring(([string]$args[2]).LastIndexOf('/') + 1)
-
 
 switch ($taskAction) {
     'DiscoverTasks' {
