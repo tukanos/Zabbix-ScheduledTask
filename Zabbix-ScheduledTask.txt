@@ -1,2 +1,5 @@
 Timeout=30
+# For PowerShell < 7.x
 UserParameter=TaskSchedulerMonitoring[*],powershell -NoProfile -ExecutionPolicy Bypass -File "c:\Services\Zabbix\scripts\DiscoverScheduledTasks.ps1" "$1" "$2" "$3"
+# For PowerShell > 7.x
+UserParameter=TaskSchedulerMonitoring[*],"C:\Program Files\PowerShell\7\pwsh.exe" -NoProfile -ExecutionPolicy Bypass -File "c:\Services\Zabbix\scripts\DiscoverScheduledTasks.ps1" "$1" "$2" "$3"
