@@ -14,7 +14,7 @@
 
 $ErrorActionPreference = "Stop"
 
-Function Convert-ToUnixDate($PSdate) {
+function Convert-ToUnixDate($PSdate) {
 	$epoch = [timezone]::CurrentTimeZone.ToLocalTime([datetime]'1/1/1970')
 	if ($PSdate -eq $Null) {
 		$PSdate = $epoch
@@ -66,7 +66,6 @@ switch ($Item) {
 		$taskResult = Get-ScheduledTaskInfoByFullName $Id
 
 		$taskResult1 = $taskResult.LastRunTime
-		$date = get-date -date "01/01/1970"
 		$taskResult2 = Convert-ToUnixDate($taskResult1)
 		Write-Output ($taskResult2)
 	}
@@ -75,7 +74,6 @@ switch ($Item) {
 		$taskResult = Get-ScheduledTaskInfoByFullName $Id
 
 		$taskResult1 = $taskResult.NextRunTime
-		$date = get-date -date "01/01/1970"
 		$taskResult2 = Convert-ToUnixDate($taskResult1)
 		Write-Output ($taskResult2)
 	}
