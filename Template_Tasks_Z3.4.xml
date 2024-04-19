@@ -9,8 +9,8 @@
     </groups>
     <templates>
         <template>
-            <template>Template Windows Task Scheduled</template>
-            <name>Template Windows Task Scheduled</name>
+            <template>Windows Task Scheduled Template</template>
+            <name>Windows Task Scheduled Template</name>
             <description>Discover and monitor all Task from &quot;Task Scheduler Library&quot; with subfolders indicate in powershell script.</description>
             <groups>
                 <group>
@@ -54,14 +54,14 @@
                         <conditions/>
                     </filter>
                     <lifetime>0</lifetime>
-                    <description>Discover all Task at &quot;Task Scheduler Libraray&quot; with Subfolders indicate in powershell script.</description>
+                    <description>Discover all Task at &quot;Task Scheduler Library&quot; with subfolders indicate in powershell script.</description>
                     <item_prototypes>
                         <item_prototype>
-                            <name>Task: {#APPTASKS}: Last Result</name>
+                            <name>Task: {#APPTASKSNAME}: Last Result</name>
                             <type>0</type>
                             <snmp_community/>
                             <snmp_oid/>
-                            <key>TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}]</key>
+                            <key>TaskSchedulerMonitoring[TaskLastResult,{#APPTASKSKEY}]</key>
                             <delay>120</delay>
                             <history>90d</history>
                             <trends>365d</trends>
@@ -84,7 +84,7 @@
                             <publickey/>
                             <privatekey/>
                             <port/>
-                            <description>Last Result of Task, numeric value&#13; in most cases 0 = succesfull</description>
+                            <description>Last Result of Task, numeric value&#13; in most cases 0 = successful</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -101,11 +101,11 @@
                             <master_item_prototype/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Task: {#APPTASKS}: Last Run Time</name>
+                            <name>Task: {#APPTASKSNAME}: Last Run Time</name>
                             <type>0</type>
                             <snmp_community/>
                             <snmp_oid/>
-                            <key>TaskSchedulerMonitoring[TaskLastRunTime,{#APPTASKS}]</key>
+                            <key>TaskSchedulerMonitoring[TaskLastRunTime,{#APPTASKSKEY}]</key>
                             <delay>120</delay>
                             <history>90d</history>
                             <trends>365d</trends>
@@ -145,11 +145,11 @@
                             <master_item_prototype/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Task: {#APPTASKS}: Next Run Time</name>
+                            <name>Task: {#APPTASKSNAME}: Next Run Time</name>
                             <type>0</type>
                             <snmp_community/>
                             <snmp_oid/>
-                            <key>TaskSchedulerMonitoring[TaskNextRunTime,{#APPTASKS}]</key>
+                            <key>TaskSchedulerMonitoring[TaskNextRunTime,{#APPTASKSKEY}]</key>
                             <delay>120</delay>
                             <history>90d</history>
                             <trends>365d</trends>
@@ -198,16 +198,16 @@
 								0x800710E0 	2147946720 	The operator or administrator has refused the request
 							-->
                             <expression>
-									{Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()} &lt;&gt; 0
-								and {Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()} &lt;&gt; 267009
-								and {Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()} &lt;&gt; 267010
-								and {Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()} &lt;&gt; 267011
-								and {Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()} &lt;&gt; 267012
-								and {Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()} &lt;&gt; 2147946720
+									{Windows Task Scheduled Template:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKSKEY}].last()} &lt;&gt; 0
+								and {Windows Task Scheduled Template:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKSKEY}].last()} &lt;&gt; 267009
+								and {Windows Task Scheduled Template:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKSKEY}].last()} &lt;&gt; 267010
+								and {Windows Task Scheduled Template:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKSKEY}].last()} &lt;&gt; 267011
+								and {Windows Task Scheduled Template:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKSKEY}].last()} &lt;&gt; 267012
+								and {Windows Task Scheduled Template:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKSKEY}].last()} &lt;&gt; 2147946720
 							</expression>
                             <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
-			    <recovery_expression>{Template Windows Task Scheduled:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKS}].last()} = 0</recovery_expression>
-                            <name>Last run of {#APPTASKS} with error!</name>
+			    <recovery_expression>{Windows Task Scheduled Template:TaskSchedulerMonitoring[TaskLastResult,{#APPTASKSKEY}].last()} = 0</recovery_expression>
+                            <name>Last run of {#APPTASKSNAME} with error!</name>
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
                             <url/>

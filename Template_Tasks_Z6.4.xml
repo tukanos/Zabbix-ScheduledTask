@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
-    <version>6.0</version>
-    <date>2023-11-28T10:58:13Z</date>
-    <groups>
-        <group>
+    <version>6.4</version>
+    <template_groups>
+        <template_group>
             <uuid>7df96b18c230490a9a0a9e2307226338</uuid>
             <name>Templates</name>
-        </group>
-    </groups>
+        </template_group>
+        <template_group>
+            <uuid>846977d1dfed4968bc5f8bdb363285bc</uuid>
+            <name>Templates/Operating systems</name>
+        </template_group>
+    </template_groups>
     <templates>
         <template>
             <uuid>57954842d3fb43c5923be6da6458432f</uuid>
@@ -17,6 +20,9 @@
             <groups>
                 <group>
                     <name>Templates</name>
+                </group>
+                <group>
+                    <name>Templates/Operating systems</name>
                 </group>
             </groups>
             <discovery_rules>
